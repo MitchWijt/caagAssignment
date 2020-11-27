@@ -4,25 +4,25 @@ CRUD application for the code assesment for Caag.
 
 ## Instructions
 
-In order to make the automatic email work uppon creating and updating of a student record. Make sure to add your email address in the .env file. 
+In order to make the automatic email work uppon creating and updating of a student record. Make sure to add your email address in the .env file.  
 TEMP_EMAIL={your email}
 
 If you want to use a temporary email address you can use: https://temp-mail.org/
 
-In order for the POST request to work you need to pass in 2 required form fields 
-name -> minimal length of 2 Characters
+In order for the POST request to work you need to pass in 2 required form fields  
+name -> minimal length of 2 Characters  
 age -> must be a number
 
-In order for the PUT request to work you need to pass in 2 required form fields 
-name -> minimal length of 2 Characters
-age -> must be a number
+In order for the PUT request to work you need to pass in 2 required form fields  
+name -> minimal length of 2 Characters  
+age -> must be a number  
 
 
 ## Endpoints
 
-GET /api/student/{studentId}
-POST /api/student
-PUT /api/student/{studentId}
+GET /api/student/{studentId}  
+POST /api/student  
+PUT /api/student/{studentId}  
 DELETE /api/student/{studentId}
 
 ## Commands
