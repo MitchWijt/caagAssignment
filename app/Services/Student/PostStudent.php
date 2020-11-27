@@ -13,7 +13,7 @@ class PostStudent {
     $studentId = uniqid(); //generates a unique ID for student file name
     $this->filePath = FileManager::getStudentFilePathFromStudentId($studentId);
 
-    $jsonInputData = json_encode(['name' => $request->input('name'), 'age' => $request->input('age')]);
+    $jsonInputData = json_encode(['id' => $studentId, 'name' => $request->input('name'), 'age' => $request->input('age')]);
     Filemanager::writeToFile($this->filePath, $jsonInputData);
 
     mail(env('TEMP_EMAIL'), 'Student has been created', $jsonInputData);
