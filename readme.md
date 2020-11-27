@@ -8,3 +8,23 @@ In order to make the automatic email work uppon creating and updating of a stude
 TEMP_EMAIL={your email}
 
 If you want to use a temporary email address you can use: https://temp-mail.org/
+
+In order for the POST request to work you need to pass in 2 required form fields 
+name -> minimal length of 2 Characters
+age -> must be a number
+
+In order for the PUT request to work you need to pass in 2 required form fields 
+name -> minimal length of 2 Characters
+age -> must be a number
+
+
+## Endpoints
+
+GET /api/student/{studentId}
+POST /api/student
+PUT /api/student/{studentId}
+DELETE /api/student/{studentId}
+
+## Commands
+
+To run the hourly email command enter: php artisan schedule:run
