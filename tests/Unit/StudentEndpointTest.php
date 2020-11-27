@@ -17,7 +17,7 @@ class StudentEndpointTest extends TestCase
         $response = $this->get('/api/student/5fc0691f22467');
 
         $response->assertStatus(200);
-        $this->assertSame($response->getContent(), '{"name":"wesley","age":"18"}');
+        $this->assertSame($response->getContent(), '{"name":"wesley","age":"18","id":"5fc0691f22467"}');
     }
 
     public function testStudentGetRequestReturnsNotFound() {
@@ -38,7 +38,10 @@ class StudentEndpointTest extends TestCase
         ])->json('POST', '/api/student' , ['name' => 'foo', 'age' => '5']);
 
         $response->assertStatus(200);
-        $this->assertSame($response->getContent(), '{"name":"foo","age":"5"}');
+        $jsonResponse = json_decode($response->getContent());
+        $expectedJson = json_encode(['id' => $jsonResponse->id, 'name' => 'foo', 'age' => '5']);
+        
+        $this->assertSame($response->getContent(), $expectedJson);
     }
 
 
@@ -49,7 +52,7 @@ class StudentEndpointTest extends TestCase
         ])->json('PUT', '/api/student/' . static::STUDENT_ID , ['name' => 'bar', 'age' => '10']);
 
         $response->assertStatus(200);
-        $this->assertSame($response->getContent(), '{"name":"bar","age":"10"}');
+        $this->assertSame($response->getContent(), '{"name":"bar","age":"10","id":"5fc0691f22467"}');
 
         $response = $this->withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
