@@ -27,4 +27,5 @@ DELETE /api/student/{studentId}
 
 ## Commands
 
-To run the hourly email command enter: php artisan schedule:run
+To run the hourly email command enter: php artisan schedule:run  
+To run the server on local host enter: php artisan serve (make sure to have installed composer and the vendor files)
