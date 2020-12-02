@@ -7,8 +7,9 @@ use App\Services\Errors as Errors;
 class GetStudent {
   private $filePath;
 
-  public function getStudentJsonData($request) {
-    $studentId = $request->id;
+  public function getStudentJsonData($request, $studentId) {
+    if(!$studentId) Errors::throw404Error();
+
     $this->filePath = FileManager::getStudentFilePathFromStudentId($studentId);
 
     if (!file_exists($this->filePath)) {

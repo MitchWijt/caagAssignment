@@ -17,11 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/student', 'StudentController@studentRequestHandler');
-Route::get('/student/{id}', 'StudentController@studentRequestHandler');
-Route::put('/student/{id}', 'StudentController@studentRequestHandler');
-Route::delete('/student/{id}', 'StudentController@studentRequestHandler');
-Route::fallback(function () {
-    abort(404);
-});
 

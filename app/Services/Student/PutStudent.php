@@ -7,10 +7,11 @@ use App\Services\Errors as Errors;
 class PutStudent {
   private $filePath;
 
-  public function updateStudentJsonData($request) {
+  public function updateStudentJsonData($request, $studentId) {
     $this->validateFormData($request);
     
-    $studentId = $request->id;
+    if(!$studentId) Errors::throw404Error();
+
     $this->filePath = FileManager::getStudentFilePathFromStudentId($studentId);
 
     if (!file_exists($this->filePath)) {

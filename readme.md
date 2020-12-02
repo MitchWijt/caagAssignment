@@ -18,14 +18,15 @@ name -> minimal length of 2 Characters
 age -> must be a number  
 
 
-## Endpoints
+## CRUD Endpoints
 
-GET /api/student/{studentId}  
-POST /api/student  
-PUT /api/student/{studentId}  
-DELETE /api/student/{studentId}
+GET /students/{studentId}  
+POST /students  
+PUT /students/{studentId}  
+DELETE /students/{studentId}
 
 ## Commands
 
+To run tests enter: vendor/bin/phpunit
 To run the hourly email command enter: php artisan schedule:run  
 To run the server on local host enter: php artisan serve (make sure to have installed composer and the vendor files)
