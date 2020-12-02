@@ -14,18 +14,18 @@ class StudentEndpointTest extends TestCase
     const STUDENT_DATA_PATH = __DIR__ . '/../../public/data/';
   
     public function testStudentGetRequestReturnsCorrectData() {
-        $response = $this->get('/api/student/5fc0691f22467');
+        $response = $this->get('/students/5fc0691f22467');
 
         $response->assertStatus(200);
         $this->assertSame($response->getContent(), '{"name":"wesley","age":"18","id":"5fc0691f22467"}');
     }
 
     public function testStudentGetRequestReturnsNotFound() {
-        $response = $this->get('/api/student/123');
+        $response = $this->get('/students/123');
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-        ])->json('GET', '/api/student/123');
+        ])->json('GET', '/students/123');
 
         $response->assertStatus(404);
         $this->assertSame($response->getContent(), '{"error":"Not Found"}');
@@ -35,7 +35,7 @@ class StudentEndpointTest extends TestCase
         $response = $this->withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Accept' => 'application/json',
-        ])->json('POST', '/api/student' , ['name' => 'foo', 'age' => '5']);
+        ])->json('POST', '/students' , ['name' => 'foo', 'age' => '5']);
 
         $response->assertStatus(200);
         $jsonResponse = json_decode($response->getContent());
@@ -49,7 +49,7 @@ class StudentEndpointTest extends TestCase
         $response = $this->withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Accept' => 'application/json',
-        ])->json('PUT', '/api/student/' . static::STUDENT_ID , ['name' => 'bar', 'age' => '10']);
+        ])->json('PUT', '/students/' . static::STUDENT_ID , ['name' => 'bar', 'age' => '10']);
 
         $response->assertStatus(200);
         $this->assertSame($response->getContent(), '{"name":"bar","age":"10","id":"5fc0691f22467"}');
@@ -57,7 +57,7 @@ class StudentEndpointTest extends TestCase
         $response = $this->withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Accept' => 'application/json',
-        ])->json('PUT', '/api/student/' . static::STUDENT_ID , ['name' => 'wesley', 'age' => '18']);
+        ])->json('PUT', '/students/' . static::STUDENT_ID , ['name' => 'wesley', 'age' => '18']);
     }
 
     static function tearDownAfterClass() : void {

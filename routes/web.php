@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('students', StudentController::class);
 
-
-
+Route::fallback(function () {
+    abort(404);
+});

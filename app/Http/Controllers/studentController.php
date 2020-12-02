@@ -9,25 +9,21 @@ use App\Services\Student\PutStudent as PutStudent;
 use App\Services\Student\PostStudent as PostStudent;
 use App\Services\Student\DeleteStudent as DeleteStudent;
 
+class StudentController extends Controller {
+    
+    public function show(Request $request, GetStudent $getStudent, $id) {
+        return $getStudent->getStudentJsonData($request, $id);
+    }
 
+    public function store(Request $request, PostStudent $postStudent){
+        return $postStudent->addNewStudent($request);
+    }
 
+    public function update(Request $request, PutStudent $putStudent, $id){
+        return $putStudent->updateStudentJsonData($request, $id);
+    }
 
-
-class studentController extends Controller
-{
-    public function studentRequestHandler(
-        Request $request, 
-        GetStudent $getStudent, 
-        PutStudent $putStudent,
-        PostStudent $postStudent,
-        DeleteStudent $deleteStudent
-        ) {
-        $requestMethod = $request->method();
-        switch($requestMethod) {
-            case "GET" : return $getStudent->getStudentJsonData($request);
-            case "PUT" : return $putStudent->updateStudentJsonData($request);
-            case "POST" : return $postStudent->addNewStudent($request);
-            case "DELETE" : return $deleteStudent->deleteStudent($request);
-        }
+    public function destroy(Request $request, DeleteStudent $deleteStudent, $id){
+        return $deleteStudent->deleteStudent($request, $id);
     }
 }

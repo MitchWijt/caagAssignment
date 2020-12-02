@@ -7,8 +7,7 @@ use App\Services\Errors as Errors;
 class DeleteStudent {
   private $filePath;
 
-  public function deleteStudent($request) {
-    $studentId = $request->id;
+  public function deleteStudent($request, $studentId) {
     $this->filePath = FileManager::getStudentFilePathFromStudentId($studentId);
 
     if (!file_exists($this->filePath)) {
