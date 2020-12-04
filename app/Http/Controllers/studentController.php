@@ -11,19 +11,19 @@ use App\Services\Student\DeleteStudent as DeleteStudent;
 
 class StudentController extends Controller {
     
-    public function show(Request $request, GetStudent $getStudent, $id) {
-        return $getStudent->getStudentJsonData($request, $id);
+    public function getStudent(Request $request, GetStudent $getStudent, $id) {
+        return $getStudent->getStudent($request, $id);
     }
 
-    public function store(Request $request, PostStudent $postStudent){
+    public function addStudent(Request $request, PostStudent $postStudent){
         return $postStudent->addNewStudent($request);
     }
 
-    public function update(Request $request, PutStudent $putStudent, $id){
+    public function updateStudent(Request $request, PutStudent $putStudent, $id){
         return $putStudent->updateStudentJsonData($request, $id);
     }
 
-    public function destroy(Request $request, DeleteStudent $deleteStudent, $id){
+    public function deleteStudent(Request $request, DeleteStudent $deleteStudent, $id){
         return $deleteStudent->deleteStudent($request, $id);
     }
 }

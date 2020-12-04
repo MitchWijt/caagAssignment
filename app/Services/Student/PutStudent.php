@@ -4,6 +4,8 @@ namespace App\Services\Student;
 use App\Services\FileManager as FileManager;
 use App\Services\Errors as Errors;
 
+use App\Student;
+
 class PutStudent {
   private $filePath;
 
@@ -12,23 +14,14 @@ class PutStudent {
     
     if(!$studentId) Errors::throw404Error();
 
-    $this->filePath = FileManager::getStudentFilePathFromStudentId($studentId);
+    $student = Student::findOneById($studentId);
+    $student->name = $request->input('name');
+    $student->age = $request->input('age');
+    $student->save();
 
-    if (!file_exists($this->filePath)) {
-      Errors::throw404Error();
-    }
+    mail(env('TEMP_EMAIL'), 'Student has been updated', $student);
 
-    $decodedJsonObject = json_decode(file_get_contents($this->filePath, true));
-    $decodedJsonObject->name = $request->input('name');
-    $decodedJsonObject->age = $request->input('age');
-
-    $json = json_encode($decodedJsonObject);
-    
-    Filemanager::writeToFile($this->filePath, $json);
-
-    mail(env('TEMP_EMAIL'), 'Student has been updated', $json);
-
-    return $json;
+    return $student;
   }
 
   private function validateFormData($request) {
