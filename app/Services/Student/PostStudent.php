@@ -4,21 +4,24 @@ namespace App\Services\Student;
 use App\Services\FileManager as FileManager;
 use App\Services\Errors as Errors;
 
+use App\Student;
+
 class PostStudent {
   private $filePath;
 
   public function addNewStudent($request) {
     $this->validateFormData($request);
 
-    $studentId = uniqid(); //generates a unique ID for student file name
-    $this->filePath = FileManager::getStudentFilePathFromStudentId($studentId);
+    $newStudent = new Student();
+    $newStudent->name = $request->input('name');
+    $newStudent->age = $request->input('age');
+    $newStudent->save();
 
-    $jsonInputData = json_encode(['id' => $studentId, 'name' => $request->input('name'), 'age' => $request->input('age')]);
-    Filemanager::writeToFile($this->filePath, $jsonInputData);
+    $student = Student::findOneById($newStudent->id);
 
-    mail(env('TEMP_EMAIL'), 'Student has been created', $jsonInputData);
+    mail(env('TEMP_EMAIL'), 'Student has been created', $student);
 
-    return $jsonInputData;
+    return $student;
   }
 
   private function validateFormData($request) {

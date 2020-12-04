@@ -14,7 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('students', StudentController::class);
+Route::get('/students/{id}', "StudentController@getStudent");
+Route::post('/students/add-new', "StudentController@addStudent");
+Route::post('/students/update/{id}', "StudentController@updateStudent");
+Route::post('/students/delete/{id}', "StudentController@deleteStudent");
 
 Route::fallback(function () {
     abort(404);
