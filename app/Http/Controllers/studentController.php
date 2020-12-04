@@ -20,7 +20,7 @@ class StudentController extends Controller {
     }
 
     public function updateStudent(Request $request, PutStudent $putStudent, $id){
-        return $putStudent->updateStudentJsonData($request, $id);
+        return $putStudent->updateStudent($request, $id);
     }
 
     public function deleteStudent(Request $request, DeleteStudent $deleteStudent, $id){

@@ -1,18 +1,16 @@
 <?php
 namespace App\Services\Student;
 
-use App\Services\FileManager as FileManager;
 use App\Services\Errors as Errors;
 
 use App\Student;
 
 class DeleteStudent {
-  private $filePath;
-
   public function deleteStudent($request, $studentId) {
     $student = Student::findOneById($studentId);
-    $student->delete();
+    if(!$student) return redirect('/')->withErrors('Could not find students with this ID');
 
-    return json_encode(['success' => 'student was successfully deleted']);
+    $student->delete();
+    return redirect('/')->with('success', 'Student has successfully been deleted');
   }
 }
